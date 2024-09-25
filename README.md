@@ -46,7 +46,7 @@ android: {
   defaultConfig {
     ...
     manifestPlaceholders += [
-        OPENINSTALL_APPKEY : "openinstall为应用分配的appkey",
+        OPENINSTALL_APPKEY : "openinstallglobal平台为应用分配的appkey",
     ]
   }    
 }
@@ -61,7 +61,7 @@ android: {
     <category android:name="android.intent.category.DEFAULT"/>
     <category android:name="android.intent.category.BROWSABLE"/>
 
-    <data android:scheme="openinstall为应用分配的scheme"/>
+    <data android:scheme="openinstallglobal平台为应用分配的scheme"/>
 </intent-filter>
 ```
 

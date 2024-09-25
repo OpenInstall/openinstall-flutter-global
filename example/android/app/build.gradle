@@ -42,7 +42,7 @@ android {
 
 
         manifestPlaceholders = [
-                OPENINSTALL_APPKEY : "ufp21n",
+                OPENINSTALL_APPKEY : "openinstallglobal平台为应用分配的appkey",
         ]
 
     }

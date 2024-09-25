@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:openinstall_flutter_plugin/openinstall_flutter_plugin.dart';
+import 'package:openinstall_flutter_plugin/openinstall_flutter_global.dart';
 
 void main() => runApp(MyApp());
 
