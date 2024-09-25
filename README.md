@@ -11,7 +11,7 @@ openinstall_flutter_global 插件封装了openinstall 国际站原生SDK，集�
 
 ``` json 
 dependencies:
-  openinstall_flutter_plugin: 
+  openinstall_flutter_global: 
     git:
       url: https://github.com/OpenInstall/openinstall-flutter-global
 ```
@@ -29,7 +29,7 @@ $ flutter pub get
 在 `Dart` 代码中使用以下代码导入:
 
 ``` dart
-import 'package:openinstall_flutter_plugin/openinstall_flutter_global.dart';
+import 'package:openinstall_flutter_global/openinstall_flutter_global.dart';
 ```
 
 ## 二、配置
