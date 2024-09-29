@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openinstall_flutter_plugin/openinstall_flutter_plugin.dart';
+import 'package:openinstall_flutter_global/openinstall_flutter_global.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('openinstall_flutter_plugin');
+  const MethodChannel channel = MethodChannel('openinstall_flutter_global');
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
