@@ -35,6 +35,7 @@ import 'package:openinstall_flutter_global/openinstall_flutter_global.dart';
 ## 二、配置
 
 前往 [openinstall控制台](https://developer.openinstallglobal.com/) 创建应用并获取 openinstall 为应用分配的` appkey` 和 `scheme` 以及 iOS的关联域名（Associated Domains）  
+![enable Associated Domains](https://web.cdn.openinstallcloud.com/doc/thirdpart.png)
 
 ### Android 平台配置
 
@@ -66,6 +67,71 @@ android: {
 ```
 
 ### iOS 平台配置
+#### 配置 appkey
+在Flutter工程下的 `ios/Runner/Info.plist` 文件中配置 `appKey` 键值对，如下：
+``` xml
+<key>com.openinstall.APP_KEY</key>
+<string>openinstallglobal 分配给应用的 appkey</string>
+```
+#### 一键拉起配置
+
+##### universal links 相关配置
+
+1.开启Associated Domains服务
+
+对于iOS，为确保能正常拉起，AppID必须开启Associated Domains功能，请到[苹果开发者网站](https://developer.apple.com/ "苹果开发者网站")，选择Certificate, Identifiers & Profiles，选择相应的AppID，开启Associated Domains。
+> 注意：当AppID重新编辑过之后，需要更新相应的mobileprovision证书。
+
+![enable Associated Domains](https://web.cdn.openinstallcloud.com/doc/assciationDev.png)
+
+2.配置universal links关联域名（iOS 9以后推荐使用）
+
+关联域名(Associated Domains) 的值请在openinstall控制台获取（openinstall应用控制台->iOS集成->iOS应用配置）
+
+该文件是给iOS平台配置的文件，在 ios/Runner 目录下创建文件名为 Runner.entitlements 的文件，Runner.entitlements 内容如下：
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key><!--固定key值-->
+    <array>
+        <!--这里换成你在openinstall后台的关联域名(Associated Domains)-->
+        <string>applinks:xxxxxx.openinstall.io</string>
+    </array>
+</dict>
+</plist>
+```
+
+如果拉起无法获取到参数，可能是因为方法被其它插件覆盖导致（openinstall插件不会覆盖其它插件），可以修改其它插件通用链接delegate回调`..userActivity..`方法`return NO;`来解决。  
+
+##### scheme 配置
+添加应用对应的 scheme，可在工程“TARGETS -> Info -> URL Types” 里快速添加，图文请看
+
+![iOS scheme](https://web.cdn.openinstallcloud.com/doc/ios-scheme.png)
+
+如果拉起无法获取到参数，可能是因为方法被其它插件覆盖导致（openinstall插件不会覆盖其它插件），可以修改其它插件通用链接delegate回调`..hanldeOpenURL..`方法`return NO;`来解决。 
+
+### 三、iOS隐私清单(PrivacyInfo.xcprivacy)
+SDK会默认包含隐私清单文件，即`PrivacyInfo.xcprivacy`  
+
+pod集成SDK时，提供了隐私清单文件（PrivacyInfo.xcprivacy），是bundle形式存在的，可能会导致在xcode14之后编译提示未签名的错误：  
+`Signing for "libOpenInstallSDK-OPPrivacy" requires a development team.`
+
+可以在`Podfile`文件中做如下配置，然后重新`pod install`（推荐）：  
+``` plist
+post_install do |installer|
+   installer.pods_project.targets.each do |target|
+       if target.respond_to?(:product_type) and target.product_type == "com.apple.product-type.bundle"
+          target.build_configurations.each do |config|
+            config.build_settings['CODE_SIGN_IDENTITY'] = ''
+            config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+          end
+       end
+    end
+end
+```
 
 
 ## 三、使用
@@ -142,8 +208,6 @@ Map<String, String> extraMap = {
 };
 _openinstallFlutterPlugin.reportEffectPoint("effect_detail", 1, extraMap);
 ```
-
-备注：效果点明细统计需要原生iOS SDK >=2.6.0，请从CocoaPods拉取、更新、确认版本。
 
 #### 裂变分享上报
 `reportShare(String shareCode, String platform)`  
