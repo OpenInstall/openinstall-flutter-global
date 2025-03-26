@@ -1,4 +1,4 @@
-package io.openinstall.openinstall_flutter_plugin_example;
+package io.openinstall.openinstall_flutter_global_example;
 
 import io.flutter.app.FlutterApplication;
 import io.flutter.embedding.engine.FlutterEngine;

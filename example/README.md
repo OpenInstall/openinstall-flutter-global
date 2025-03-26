@@ -1,10 +1,10 @@
-# openinstall_flutter_plugin_example
+# openinstall_flutter_global_example
 
 ``` dart
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:openinstall_flutter_plugin/openinstall_flutter_plugin.dart';
+import 'package:openinstall_flutter_global/openinstall_flutter_global.dart';
 
 void main() => runApp(MyApp());
 
