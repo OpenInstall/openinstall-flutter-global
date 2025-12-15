@@ -1,6 +1,6 @@
 name: openinstall_flutter_global
 description: openinstall_flutter_global is a Flutter plugin based on openinstall, and with null safety support.
-version: 1.0.0
+version: 1.0.1
 homepage: https://www.openinstallglobal.com/
 
 environment:

@@ -11,7 +11,7 @@ openinstall_flutter_global 插件封装了openinstall 国际站原生SDK，集�
 
 ``` json 
 dependencies:
-  openinstall_flutter_global: 1.0.0
+  openinstall_flutter_global: 1.0.1
 ```
 
 ### 2. 安装插件
